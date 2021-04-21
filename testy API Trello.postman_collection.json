@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "d66fde99-532c-40e5-a1cc-6997b5e4692a",
+		"name": "testy API Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/members/:id",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"members",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "przemysawchmielowiec"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"board name is correct\", function () {\r",
+							"    pm.expect(response.name).to.eql(\"testowy board 2\");\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"boardID\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/boards/?name=testowy board 2&key={{key}}&token={{token}}&defaultLists=false",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testowy board 2"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "defaultLists",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm. response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"list name is correct\", function () {\r",
+							"    pm.expect(response.name).to.eql(\"testowa lista\");\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"firtlistid\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/lists/?name=testowa lista&key={{key}}&token={{token}}&idBoard={{boardID}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"lists",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testowa lista"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create second list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm. response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"list name is correct\", function () {\r",
+							"    pm.expect(response.name).to.eql(\"testowa lista 2\");\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"secondlistid\", response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/lists/?name=testowa lista 2&key={{key}}&token={{token}}&idBoard={{boardID}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"lists",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testowa lista 2"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create a new card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let response = pm.response.json();\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.collectionVariables.set(\"cardId\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/cards/?name=testowa karta&key={{key}}&token={{token}}&idBoard={{boardID}}&idList={{secondlistid}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"cards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testowa karta"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						},
+						{
+							"key": "idList",
+							"value": "{{secondlistid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/cards/{{cardId}}?key={{key}}&token={{token}}&idList={{firtlistid}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"cards",
+						"{{cardId}}"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "testowa karta",
+							"disabled": true
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "idList",
+							"value": "{{firtlistid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://{{url}}/{{api_ver}}/boards/{{boardID}}?key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{api_ver}}",
+						"boards",
+						"{{boardID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "boardID",
+			"value": ""
+		},
+		{
+			"key": "firtlistid",
+			"value": ""
+		},
+		{
+			"key": "secondlistid",
+			"value": ""
+		},
+		{
+			"key": "cardId",
+			"value": ""
+		}
+	]
+}
